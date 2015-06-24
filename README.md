@@ -22,9 +22,9 @@
 - Set specified User for using API on ERPNext
 - Set configurations in config.php
   - The following items are mandatory
-    - auth_url
-    - api_url
-    - cookie_file
+    - [auth_url](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L3)
+    - [api_url](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L4)
+    - [cookie_file](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L6)
   - If [auth](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L5) is not set in config, It must be set as arguments for constructor.
   - Change CONF_FILE in [FrappeClient.php](https://github.com/tmimori/FrappeClient-PHP/blob/master/FrappeClient.php#L27)
 
@@ -76,9 +76,13 @@
 
 ## Class
 
+### FrappeClient
+
+- (no public properties)
+
 ### FrappeClient_Result
 
-- body (boject) Responce body
+- body (object) Responce body
 - info (Array) CURL_INFO (Header)
 - errorno (Int) CURL_ERRORNO
 - error (String) CURL_ERROR
