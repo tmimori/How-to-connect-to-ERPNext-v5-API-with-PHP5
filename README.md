@@ -45,7 +45,7 @@
   - @params array fields
   - @params int limit_start (Optional)
   - @params int limit_page_length (Optional)
-  - @returns class FrappeClient_Result
+  - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
 ### Geting single data
@@ -53,7 +53,7 @@
 - get()
   - @params string DocType
   - @params string Key of DocType
-  - @returns class FrappeClient_Result
+  - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
 ### Inserting data
@@ -61,7 +61,7 @@
 - insert()
   - @params string DocType
   - @params array Data for Insert
-  - @returns class FrappeClient_Result
+  - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
 ### Updating data
@@ -70,7 +70,7 @@
   - @params string DocType
   - @params string Key of DocType
   - @params array Data for Insert
-  - @returns class FrappeClient_Result
+  - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
 
@@ -78,14 +78,11 @@
 
 ### FrappeClient
 
-- (no public properties)
-
-### FrappeClient_Result
-
 - body (object) Responce body
-- info (Array) CURL_INFO (Header)
+- header (Array) CURL_INFO
 - errorno (Int) CURL_ERRORNO
 - error (String) CURL_ERROR
+- is_auth (Boolean) Authorized or not
 
 
 ## Difinition of terms

@@ -26,6 +26,12 @@ class FrappeClient {
 
 	const CONF_FILE = '/var/www/erpnext/config.php';
 
+	public $errorno = 0;
+	public $error;
+	public $body;
+	public $header;
+	public $is_auth = false;
+
 	private $_auth_url = "";
 	private $_api_url = "";
 	private $_cookie_file = "";
@@ -66,23 +72,10 @@ class FrappeClient {
 		}
 
 	private function _auth_check(){
-		if(!is_file($this->_cookie_file)){
-			throw new FrappeClient_Exception(
-						"Cookie file not found:".$this->_cookie_file
-						,3
-					);
-		}
-		$result = $this->_curl(
-			'GET'
-			,array(
-				'doctype' => 'User'
-				,'data' => $this->_auth['usr']
-				)
-			);
-		if(empty($result->body->data)){
+		if($this->is_auth == false){
 			throw new FrappeClient_Exception(
 						"Auth check fail."
-						,4
+						,3
 					);
 		}else{
 			return true;
@@ -93,7 +86,21 @@ class FrappeClient {
 		if(is_file($this->_cookie_file)){
 			@unlink($this->_cookie_file);
 		}
-		return $this->_curl('AUTH',$this->_auth);
+		$login_result = $this->_curl('AUTH',$this->_auth);
+		if(isset($login_result->body->message)){
+			$this->is_auth = true;
+		}else{
+			throw new FrappeClient_Exception(
+						"Auth fail."
+						,4
+					);
+		}
+		if(!is_file($this->_cookie_file)){
+			throw new FrappeClient_Exception(
+						"Cookie file not found:".$this->_cookie_file
+						,5
+					);
+		}
 	}
 
 	public function get(
@@ -254,45 +261,25 @@ class FrappeClient {
 			curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 			curl_setopt($ch,CURLOPT_TIMEOUT, $this->_curl_timeout);
 			$response = curl_exec($ch);
-			$info = curl_getinfo($ch);
+			$this->header = curl_getinfo($ch);
 			$error_no = curl_errno($ch);
 			$error = curl_error($ch);
 			curl_close($ch);
-			return new FrappeClient_Result(
-					$response
-					,$info
-					,$error_no
-					,$error
-				);
-		}
-
-	}
-
-class FrappeClient_Result {
-
-	public $errorno = 0;
-	public $error = '';
-	public $body;
-	public $info;
-	public $params;
-
-	function __construct(
-			$result_body
-			,$result_info
-			,$errorno=0
-			,$error=''
-		){
-			$this->body = @json_decode($result_body);
-			if(JSON_ERROR_NONE != json_last_error()){
-				$this->body = $result_body;
+			if($error_no){
+				$this->error_no = $error_no;
 			}
-			$this->info = $result_info;
-			$this->errorno = $errorno;
-			$this->error = $error;
+			if($error){
+				$this->error = $error;
+			}
+			$this->body = @json_decode($response);
+			if(JSON_ERROR_NONE != json_last_error()){
+				$this->body = $response;
+			}
 			return $this;
 		}
 
 	}
+
 
 class FrappeClient_Exception extends Exception {
 
