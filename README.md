@@ -41,10 +41,10 @@
 
 - search()
   - @params string DocType
-  - @params array Conditions
-  - @params array fields
-  - @params int limit_start (Optional)
-  - @params int limit_page_length (Optional)
+  - @params array conditions (Optional) - Conditions for search
+  - @params array fields (Optional) - Field which should be picked up
+  - @params int limit_start (Optional) default 0 - Offset for pagenation
+  - @params int limit_page_length (Optional) default 20 - Limit for pagenation
   - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
@@ -52,7 +52,7 @@
 
 - get()
   - @params string DocType
-  - @params string Key of DocType
+  - @params string Key - Key of DocType
   - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
@@ -60,7 +60,7 @@
 
 - insert()
   - @params string DocType
-  - @params array Data for Insert
+  - @params array data - Data should be inserted
   - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
@@ -68,8 +68,8 @@
 
 - update()
   - @params string DocType
-  - @params string Key of DocType
-  - @params array Data for Insert
+  - @params string key - Key of DocType
+  - @params array data - Data should be updated
   - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
@@ -78,11 +78,11 @@
 
 ### FrappeClient
 
-- body (object) Responce body
-- header (Array) CURL_INFO
-- errorno (Int) CURL_ERRORNO
-- error (String) CURL_ERROR
-- is_auth (Boolean) Authorized or not
+- (object) body - Responce body
+- (Array) header - CURL_INFO
+- (Int) errorno - CURL_ERRORNO
+- (String) error - CURL_ERROR
+- (Boolean) is_auth - Authorized or not
 
 
 ## Difinition of terms
@@ -90,7 +90,7 @@
 - Document
   - Data unit on ERPNext.
 - DocType
-  - Type of Document on ERPNext. Like Database Table name.
+  - Type of Document on ERPNext. Like a Database Table name.
 
 
 
