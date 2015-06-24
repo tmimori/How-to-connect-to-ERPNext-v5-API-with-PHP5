@@ -30,6 +30,8 @@
 
 ## Usage
 
+- See also [sample.php](https://github.com/tmimori/FrappeClient-PHP/blob/master/sample.php)
+
 ### Constructor
 
   - @param string usr - (Optional) User name to login - If empty, value will be set from config.
