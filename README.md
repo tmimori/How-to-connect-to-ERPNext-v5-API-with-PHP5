@@ -77,7 +77,7 @@
 
 ### FrappeClient_Result
 
-- body (string) Responce body
+- body (boject) Responce body
 - info (Array) CURL_INFO (Header)
 - errorno (Int) CURL_ERRORNO
 - error (String) CURL_ERROR
