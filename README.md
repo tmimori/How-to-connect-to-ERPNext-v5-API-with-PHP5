@@ -24,8 +24,8 @@
   - The following items are mandatory
     - auth_url
     - api_url
-    - auth
     - cookie_file
+  - If "auth" is not set in config, It must be set as arguments for constructor .
 
 ## Usage
 
