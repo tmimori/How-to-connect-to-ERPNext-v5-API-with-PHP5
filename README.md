@@ -25,7 +25,8 @@
     - auth_url
     - api_url
     - cookie_file
-  - If "auth" is not set in config, It must be set as arguments for constructor .
+  - If "auth" is not set in config, It must be set as arguments for constructor.
+  - Change CONF_FILE in FrappeClient.php#L27
 
 ## Usage
 
