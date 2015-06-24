@@ -107,7 +107,7 @@ class FrappeClient {
 			$doctype
 			,$key
 		){
-			$valid = $this->_auth_check();
+			$this->_auth_check();
 			return $this->_curl(
 				'GET'
 				, array(
@@ -124,7 +124,7 @@ class FrappeClient {
 			,$limit_start=0
 			,$limit_page_length=0
 		){
-			$valid = $this->_auth_check();
+			$this->_auth_check();
 			if($limit_page_length){
 				$limit = $limit_page_length;
 			}else{
@@ -147,7 +147,7 @@ class FrappeClient {
 			,$key
 			,$params
 		){
-			$valid = $this->_auth_check();
+			$this->_auth_check();
 			return $this->_curl(
 				'UPDATE'
 				, array('doctype' => $doctype, 'key' => $key,'data' => $params )
@@ -158,7 +158,7 @@ class FrappeClient {
 			$doctype
 			,$params
 		){
-			$valid = $this->_auth_check();
+			$this->_auth_check();
 			return $this->_curl(
 				'INSERT'
 				, array('doctype' => $doctype, 'data' => $params )
@@ -169,7 +169,7 @@ class FrappeClient {
 			$doctype
 			,$key
 		){
-			$valid = $this->_auth_check();
+			$this->_auth_check();
 			return $this->_curl(
 				'DELETE'
 				, array('doctype' => $doctype, 'key' => $key)
