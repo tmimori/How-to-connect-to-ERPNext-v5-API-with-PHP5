@@ -7,14 +7,13 @@
 
 ## Security notes
 
-- DO NOT put config.php into public accessable area.
-- DO NOT put cookie.txt into public accessable area.
+- DO NOT put config.php and cookie.txt into public accessable area.
 
 
 ## Requirements
 
 - ERPNext >= 5.0.x
-- PHP >= 5.4.8
+- PHP >= 5.2
 - curl >= 7.30.0
 - Knowledge about ERPNext and API
 
@@ -84,13 +83,7 @@
 - error (String) CURL_ERROR
 
 
-## Appendix
-
-### How to access to ERPNext API?
-
-- See. How_to_access_to_ERPNext.*.md
-
-### Difinition of terms
+## Difinition of terms
 
 - Document
   - Data unit on ERPNext.
