@@ -50,7 +50,7 @@
   - @returns class FrappeClient
   - @throws FrappeClient_Exception
 
-### Geting single data
+### Getting single data
 
 - get()
   - @params string DocType
