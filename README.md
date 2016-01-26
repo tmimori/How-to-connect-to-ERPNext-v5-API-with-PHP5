@@ -87,7 +87,7 @@
 - (Boolean) is_auth - Authorized or not
 
 
-## Difinition of terms
+## Definition of terms
 
 - Document
   - Data unit on ERPNext.
