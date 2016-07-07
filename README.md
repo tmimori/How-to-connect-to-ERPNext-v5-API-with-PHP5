@@ -12,10 +12,11 @@
 
 ## Requirements
 
-- ERPNext >= 5.0.x
-- PHP >= 5.2
+- ERPNext = 5.x
+- PHP = 5.x
 - curl >= 7.30.0
-- Knowledge about ERPNext and API
+- Knowledge about ERPNext and DocType
+- Knowledge about Web API
 
 ## Settings
 
