@@ -1,99 +1,290 @@
-# FrappeClient-PHP (API Wrapper)
+# How to connect to ERPNext v5 API with PHP 5
 
 - ERPNext is trademark of Frappe Technologies Pvt. Ltd.
 - Copyright 2013 Frappe Techlogies Pvt Ltd.
 - This code is licensed under the GNU General Public Lisense (v3) and the Documentation is licensed under Creative Commons (CC-BY-SA-3.0)
-- See. https://frappe.io/help/rest_api
-
-## Security notes
-
-- DO NOT put config.php and cookie.txt into public accessable area.
-
 
 ## Requirements
 
+- ERPNext v5
+- PHP 5.3 - 5.6
+  - php-curl
+
+## First of all
+
+- If you got some error, make sure the bellow points:
+  - URL
+  - `usr`
+  - `pwd`
+  - Cookie
+  - `parameter`
+  - `DocType`
+  - `Doc`
+  - Permissions
+  - HTTP response Code
+- As far as I know, in all cases, the cause of the error is any of the above.
+
+
+## 1. Auth
+
+- This is mandatory before any sequence of requests (except Auth).
+- After pass the auth, you should get and save the cookie.
+- You should send it with your API call, and it should be valid.
+
+### URL
+
+- `http(or https)://(ERPNext)/api/method/login`
+
+### Method
+
+- `POST`
+
+### Parameters
+
+- `usr`
+  - mandatory
+  - Login name of your ERPNext.
+- `pwd`
+  - mandatory
+  - Password for `usr`.
+
+### Return
+
+- SUCCESS
+  - JSON (with `message` property)
+- FAIL
+  - HTTP Status Code 40x
+
+
+## 2. Search
+
+### URL
+
+- `http(or https)://(ERPNext)/api/resource/(DocType name)`
+
+### Method
+
+- `GET`
+
+### Parameters
+
+- `limit_start`
+  - optional
+  - default: 0
+  - Offset for pagination
+- `limit_page_length`
+  - optional
+  - default: 20
+  - Limit for pagination
+- `conditions`
+  - optional
+  - Conditions for search
+  - e.g. "name=foobar@example.com"
+- `fields`
+  - optional
+  - Keys and values in the DocType.
+  - e.g. "name=first_name"
+
+### Return
+
+- SUCCESS
+  - JSON
+- FAIL
+  - HTTP Status Code 40x
+
+
+## 3. Get
+
+### URL
+
+- `http(or https)://(ERPNext)/api/resource/(DocType name)/(Doc name)`
+
+### Method
+
+- `GET`
+
+### Parameters
+
+- (none)
+
+### Return
+
+- SUCCESS
+  - JSON
+- FAIL
+  - HTTP Status Code 40x
+
+
+
+## 4. Insert
+
+### URL
+
+- `http(or https)://(ERPNext)/api/resource/(DocType name)`
+
+### Method
+
+- `POST`
+
+### Parameters
+
+- JSON
+
+### Return
+
+- SUCCESS
+  - JSON
+- FAIL:
+  - HTTP Status Code 40x
+
+
+## 5. Update
+
+### URL
+
+- `http(or https)://(ERPNext)/api/resource/(DocType name)/(Doc Name)`
+
+### Method
+
+- `PUT`
+
+### Parameters
+
+- JSON
+
+### Return
+
+- SUCCESS
+  - JSON
+- FAIL:
+  - HTTP Status Code 40x
+
+
+
+## 6. Delete
+
+### URL
+
+- `http(or https)://(ERPNext)/api/resource/(DocType name)/(Doc Name)`
+
+<<<<<<< HEAD
+### Method
+=======
 - ERPNext = 5.x
 - PHP = 5.x
 - curl >= 7.30.0
 - Knowledge about ERPNext and DocType
 - Knowledge about Web API
+>>>>>>> origin/master
 
-## Settings
+- `DELETE`
 
-- Set specified User for using API on ERPNext
-- Set configurations in config.php
-  - The following items are mandatory
-    - [auth_url](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L3)
-    - [api_url](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L4)
-    - [cookie_file](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L6)
-  - If [auth](https://github.com/tmimori/FrappeClient-PHP/blob/master/config.php#L5) is not set in config, It must be set as arguments for constructor.
-  - Change CONF_FILE in [FrappeClient.php](https://github.com/tmimori/FrappeClient-PHP/blob/master/FrappeClient.php#L27)
+### Parameters
 
-## Usage
+- (none)
 
-- See also [sample.php](https://github.com/tmimori/FrappeClient-PHP/blob/master/sample.php)
+### Return
 
-### Constructor
-
-  - @param string usr - (Optional) User name to login - If empty, value will be set from config.
-  - @param string pwd - (Optional) Password - If empty, value will be set from config.
-  - @returns class FrappeClient
-  - @throws FrappeClient_Exception
-
-### Searching and Getting list
-
-- search()
-  - @params string DocType
-  - @params array conditions (Optional) - Conditions for search
-  - @params array fields (Optional) - Field which should be picked up
-  - @params int limit_start (Optional) default 0 - Offset for pagenation
-  - @params int limit_page_length (Optional) default 20 - Limit for pagenation
-  - @returns class FrappeClient
-  - @throws FrappeClient_Exception
-
-### Getting single data
-
-- get()
-  - @params string DocType
-  - @params string Key - Key of DocType
-  - @returns class FrappeClient
-  - @throws FrappeClient_Exception
-
-### Inserting data
-
-- insert()
-  - @params string DocType
-  - @params array data - Data should be inserted
-  - @returns class FrappeClient
-  - @throws FrappeClient_Exception
-
-### Updating data
-
-- update()
-  - @params string DocType
-  - @params string key - Key of DocType
-  - @params array data - Data should be updated
-  - @returns class FrappeClient
-  - @throws FrappeClient_Exception
-
-
-## Class
-
-### FrappeClient
-
-- (object) body - Responce body
-- (Array) header - CURL_INFO
-- (Int) errorno - CURL_ERRORNO
-- (String) error - CURL_ERROR
-- (Boolean) is_auth - Authorized or not
-
-
-## Definition of terms
-
-- Document
-  - Data unit on ERPNext.
-- DocType
-  - Type of Document on ERPNext. Like a Database Table name.
+- SUCCESS
+  - JSON
+- FAIL:
+  - HTTP Status Code 40x
 
 
 
+## Example with php-curl
+
+- http://php.net/manual/en/book.curl.php
+
+### Auth
+
+```
+$ch = curl_init('https://example.com/api/method/login');
+curl_setopt($ch,CURLOPT_POST, true);
+curl_setopt($ch,CURLOPT_POSTFIELDS, array('usr'=>'me@example.com','pwd'=>'password'));
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'POST');
+// common description bellow
+curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+curl_setopt($ch,CURLOPT_COOKIEJAR, '(your cookie file)');
+curl_setopt($ch,CURLOPT_COOKIEFILE, '(your cookie file)');
+curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+curl_setopt($ch,CURLOPT_TIMEOUT, (set secounds for timeout));
+$response = curl_exec($ch);
+$header = curl_getinfo($ch);
+// 200? 404? or something?
+$error_no = curl_errno($ch);
+$error = curl_error($ch);
+curl_close($ch);
+if($error_no!=200){
+  // do something for login error
+  // return or exit
+}
+$body = json_decode($response);
+if(JSON_ERROR_NONE == json_last_error()){
+  // $response is not valid (as JSON)
+  // do something for login error
+  // return or exit
+}
+// use $body
+```
+
+### Search
+
+```
+$filters = json_encode(array('employee'=>'EMP/0001','att_date'=>'2017-01-01'));
+// check if $filters invalid
+$data = array('filters'=>$filters);
+$q = http_build_query($data);
+$ch = curl_init('https://example.com/api/resource/Attendance?'.$q);
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'GET');
+// the rest omitted (see Auth)
+```
+
+### Get
+
+```
+$ch = curl_init('https://example.com/api/resource/User/erp@example.com');
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'GET');
+// the rest omitted (see Auth)
+```
+
+### Update
+
+```
+$data = json_encode(array('att_date'=>'2017-01-01'));
+// check if $data invalid
+$ch = curl_init('https://example.com/api/resource/Attendance/ATT-00016');
+curl_setopt($ch,CURLOPT_POSTFIELDS,array('data'=>$data));
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'PUT');
+// the rest omitted (see Auth)
+```
+
+### Insert
+
+```
+$data = json_encode(array('att_date'=>'2017-01-01','employee'=>'EMP/0004','status'=>'Present'));
+// check if $data invalid
+$ch = curl_init('https://example.com/api/resource/Attendance');
+curl_setopt($ch,CURLOPT_POSTFIELDS,array('data'=>$data));
+curl_setopt($ch,CURLOPT_POST, true);
+// the rest omitted (see Auth)
+```
+
+### Delete
+
+```
+$ch = curl_init('https://example.com/api/resource/Attendance/ATT-00016');
+curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'DELETE');
+// the rest omitted (see Auth)
+```
+
+
+## FAQ
+
+- What is a (`DocType`, `Doc` or something)?
+  - See the reference of ERPNext.
+- I got a something what I did not expect.
+  - Re-check your codes, settings, data and your ERPNext.
+- You should correct your codes because I am using ERPNext v6 (or newer).
+  - Feel free to publish your codes on GitHub.
