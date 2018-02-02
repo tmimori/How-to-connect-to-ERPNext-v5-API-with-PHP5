@@ -22,7 +22,6 @@
   - `Doc`
   - Permissions
   - HTTP response Code
-- As far as I know, in all cases, the cause of the error is any of the above.
 
 
 ## 1. Auth
@@ -167,15 +166,7 @@
 
 - `http(or https)://(ERPNext)/api/resource/(DocType name)/(Doc Name)`
 
-<<<<<<< HEAD
 ### Method
-=======
-- ERPNext = 5.x
-- PHP = 5.x
-- curl >= 7.30.0
-- Knowledge about ERPNext and DocType
-- Knowledge about Web API
->>>>>>> origin/master
 
 - `DELETE`
 
