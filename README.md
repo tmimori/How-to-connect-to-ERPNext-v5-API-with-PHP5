@@ -273,7 +273,7 @@ curl_setopt($ch,CURLOPT_CUSTOMREQUEST, 'DELETE');
 
 ## FAQ
 
-- What is a (`DocType`, `Doc` or something)?
+- What is (`DocType`, `Doc` or something)?
   - See the reference of ERPNext.
 - I got a something what I did not expect.
   - Re-check your codes, settings, data and your ERPNext.
